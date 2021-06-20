@@ -1,0 +1,81 @@
+//Connect to your AzureAccount
+PS D:\Downloads\PowerShell-7.1.3-win-x64> Connect-AzAccount
+
+Account                   SubscriptionName     TenantId                             Environment
+-------                   ----------------     --------                             -----------
+ghoshchinmoy719@gmail.com Chinmoy Subscription d4d0fc3f-bb9b-4cd8-9346-6d8e04cc7f6a AzureCloud
+
+
+PS D:\Downloads\PowerShell-7.1.3-win-x64> New-AzResourceGroup -Name "TestResourceGroup"
+
+cmdlet New-AzResourceGroup at command pipeline position 1
+Supply values for the following parameters:
+(Type !? for Help.)
+Location: Central India
+
+ResourceGroupName : TestResourceGroup
+Location          : centralindia
+ProvisioningState : Succeeded
+Tags              :
+ResourceId        : /subscriptions/ef67ef2b-86f2-49be-a354-f6ac0ab3e15a/resourceGroups/TestResourceGroup
+
+
+PS D:\Downloads\PowerShell-7.1.3-win-x64> Get-AzResourceGroup
+
+ResourceGroupName : TestResourceGroup
+Location          : centralindia
+ProvisioningState : Succeeded
+Tags              :
+ResourceId        : /subscriptions/ef67ef2b-86f2-49be-a354-f6ac0ab3e15a/resourceGroups/TestResourceGroup
+
+
+//How to create a Virtual machine using powershell
+PS D:\Downloads\PowerShell-7.1.3-win-x64> New-AzVm -ResourceGroupName "TestResourceGroup" -Name "LinuxVm" -Location "CentralIndia"
+
+cmdlet New-AzVM at command pipeline position 1
+Supply values for the following parameters:
+Credential
+User: cghosh
+Password for user cghosh: *************
+
+
+
+ResourceGroupName        : TestResourceGroup
+Id                       : /subscriptions/ef67ef2b-86f2-49be-a354-f6ac0ab3e15a/resourceGroups/TestResourceGroup/providers/Microsoft.Compute/virtualMachines/LinuxVm
+VmId                     : 712a3d19-39c8-4782-ab14-ee7a43f306d9
+Name                     : LinuxVm
+Type                     : Microsoft.Compute/virtualMachines
+Location                 : centralindia
+Tags                     : {}
+HardwareProfile          : {VmSize}
+NetworkProfile           : {NetworkInterfaces}
+OSProfile                : {ComputerName, AdminUsername, WindowsConfiguration, Secrets, AllowExtensionOperations, RequireGuestProvisionSignal}
+ProvisioningState        : Succeeded
+StorageProfile           : {ImageReference, OsDisk, DataDisks}
+FullyQualifiedDomainName : linuxvm-dd12a7.CentralIndia.cloudapp.azure.com
+
+
+//How to create a storage using poweshell
+PS D:\Downloads\PowerShell-7.1.3-win-x64> New-AzStorageAccount -ResourceGroupName "TestResourceGroup" -Name "chinmoystorage1" -SkuName Standard_LRS -Location CentralIndia
+
+StorageAccountName ResourceGroupName PrimaryLocation SkuName      Kind      AccessTier CreationTime        ProvisioningState EnableHttpsTrafficOnly LargeFileShares
+------------------ ----------------- --------------- -------      ----      ---------- ------------        ----------------- ---------------------- ---------------
+chinmoystorage1    TestResourceGroup centralindia    Standard_LRS StorageV2 Hot        20-06-2021 08:11:17 Succeeded         True
+
+
+//How to create a log analytical workspace
+PS D:\Downloads\PowerShell-7.1.3-win-x64> New-AzOperationalInsightsWorkspace -Location CentralIndia -ResourceGroupName TestResourceGroup -Sku Standard -Name chinmoyworkspace1
+
+Name                            : chinmoyworkspace1
+ResourceId                      : /subscriptions/ef67ef2b-86f2-49be-a354-f6ac0ab3e15a/resourcegroups/testresourcegroup/providers/microsoft.operationalinsights/workspaces/c
+                                  hinmoyworkspace1
+ResourceGroupName               : TestResourceGroup
+Location                        : CentralIndia
+Tags                            : {}
+Sku                             : standard
+retentionInDays                 : 30
+CustomerId                      : eedebd99-fb67-4566-b6f7-57ad55012ecc
+ProvisioningState               : Succeeded
+PublicNetworkAccessForIngestion : Enabled
+PublicNetworkAccessForQuery     : Enabled
+PrivateLinkScopedResources      :
